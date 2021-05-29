@@ -1,10 +1,10 @@
 import api from 'providers/api'
 
 class Countries {
-  async getCountry(country) {
+  async searchCountry(country) {
     try {
       const response = await api.get(`/name/${country}`)
-      return response.data[0]
+      return response.data
     } catch (error) {
       console.log(error)
     }
