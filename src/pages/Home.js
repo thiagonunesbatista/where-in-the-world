@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import Container from 'components/Container'
-import SearchInput from 'components/SearchInput'
+import { SearchInput } from 'components/forms'
 import ListCountriesCards from 'components/ListCountriesCards'
 
 import CountriesClass from 'services/Countries'

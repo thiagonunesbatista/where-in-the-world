@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { FaSearch } from 'react-icons/fa'
 
-const SearchInput = ({
+export const SearchInput = ({
   handleInput,
   handleSubmit,
   placeholder,
@@ -70,5 +70,3 @@ const InputContainer = styled.div`
     margin-bottom: 16px;
   }
 `
-
-export default SearchInput
