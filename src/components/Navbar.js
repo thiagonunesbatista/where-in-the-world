@@ -7,20 +7,20 @@ import { usePublicContext } from 'contexts/PublicContext'
 import Container from './Container'
 
 const Navbar = () => {
-  const { handleTheme } = usePublicContext()
+  const { handleTheme, theme } = usePublicContext()
 
   return (
     <StyledNavbar>
-      <Oi>
+      <Container>
         <h1>
           <Link to='/'>Where in the world</Link>
         </h1>
 
         <SwitchThemeContainer onClick={handleTheme}>
-          <FaMoon />
+          {theme === 'dark' ? <FaMoon size='16' /> : <FaRegMoon size='16' />}
           <p>Dark Mode</p>
         </SwitchThemeContainer>
-      </Oi>
+      </Container>
     </StyledNavbar>
   )
 }
@@ -28,6 +28,7 @@ const Navbar = () => {
 const StyledNavbar = styled.nav`
   height: 80px;
   width: 100%;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.06);
 
   ${({ theme: { primaryText, secondaryBackground } }) => ({
     background: secondaryBackground,
@@ -37,6 +38,7 @@ const StyledNavbar = styled.nav`
   h1 {
     line-height: 32px;
     font-size: 24px;
+    font-weight: 800;
   }
 
   & > div {
@@ -45,16 +47,34 @@ const StyledNavbar = styled.nav`
     align-items: center;
     height: 100%;
   }
+
+  @media (max-width: 375px) {
+    h1 {
+      font-size: 16px;
+      line-height: 21.82px;
+    }
+  }
+
+  @media (min-width: 376px) and (max-width: 1190px) {
+    padding: 0 16px;
+  }
 `
 
 const SwitchThemeContainer = styled.button`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   background: none;
   border: none;
   color: inherit;
   cursor: pointer;
-`
+  width: 112px;
 
-const Oi = styled(Container)``
+  p {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21.82px;
+  }
+`
 
 export default Navbar
