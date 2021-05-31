@@ -62,12 +62,13 @@ const SelectContainer = styled.div`
   line-height: 24px;
   font-size: 16px;
   padding: 12px 16px 12px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid;
   position: relative;
   cursor: pointer;
 
-  ${({ theme: { secondaryBackground, primaryText } }) => ({
+  ${({ theme: { border, secondaryBackground, primaryText } }) => ({
     background: secondaryBackground,
+    'border-color': border,
     color: primaryText
   })}
 
