@@ -48,15 +48,11 @@ const StyledNavbar = styled.nav`
     height: 100%;
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 768px) {
     h1 {
       font-size: 16px;
       line-height: 21.82px;
     }
-  }
-
-  @media (min-width: 376px) and (max-width: 1190px) {
-    padding: 0 16px;
   }
 `
 

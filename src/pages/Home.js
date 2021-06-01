@@ -85,7 +85,8 @@ const FormContainer = styled.div`
 
   @media (max-width: 768px) {
     margin: 40px auto;
-    width: 343px;
+    max-width: 343px;
+    width: 100%;
 
     & > *:first-child {
       margin-bottom: 16px;

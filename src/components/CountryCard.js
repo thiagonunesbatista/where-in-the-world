@@ -32,7 +32,7 @@ CountryCard.propTypes = {
 
 const CountryCardContainer = styled(Link)`
   height: 303px;
-  width: 240px;
+  width: 100%;
   border: 1px solid;
 
   ${({ theme: { border, secondaryBackground } }) => ({
@@ -43,10 +43,15 @@ const CountryCardContainer = styled(Link)`
   img {
     width: inherit;
     height: 153px;
+
+    @media (max-width: 480px) {
+      height: 200px;
+    }
   }
 
-  @media (max-width: 375px) {
+  @media (max-width: 480px) {
     width: 100%;
+    height: 352px;
   }
 `
 

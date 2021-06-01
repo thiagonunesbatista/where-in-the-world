@@ -26,6 +26,7 @@ const ListContainer = styled.div`
 
   @media (max-width: 480px) {
     gap: 16px 0;
+    grid-template-columns: 100%;
   }
 `
 
