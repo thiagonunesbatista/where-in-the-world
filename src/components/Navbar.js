@@ -41,6 +41,11 @@ const StyledNavbar = styled.nav`
     font-weight: 800;
   }
 
+  h1,
+  p {
+    transition: transform 0.1s linear;
+  }
+
   h1:hover,
   p:hover {
     opacity: 0.5;
