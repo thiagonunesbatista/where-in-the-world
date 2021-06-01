@@ -41,6 +41,11 @@ const StyledNavbar = styled.nav`
     font-weight: 800;
   }
 
+  h1:hover,
+  p:hover {
+    opacity: 0.5;
+  }
+
   & > div {
     display: flex;
     justify-content: space-between;
@@ -65,6 +70,10 @@ const SwitchThemeContainer = styled.button`
   color: inherit;
   cursor: pointer;
   width: 112px;
+
+  &:hover {
+    opacity: 0.5;
+  }
 
   p {
     font-weight: 600;
