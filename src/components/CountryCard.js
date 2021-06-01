@@ -2,19 +2,27 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
+import { formatNumberWithDots } from 'helpers/formatters'
+
 const CountryCard = ({ country }) => {
   return (
-    <StyledCountryCard to={`/country/${country.name}`}>
+    <CountryCardContainer to={`/country/${country.name}`}>
       <img src={country.flag} alt={`${country.name} flag`} />
-      <div>
+      <CountryDetails>
         <h4>{country.name}</h4>
         <ul>
-          <li>Population: {country.population}</li>
-          <li>Region: {country.region}</li>
-          <li>Capital: {country.capital}</li>
+          <li>
+            <span>Population:</span> {formatNumberWithDots(country.population)}
+          </li>
+          <li>
+            <span>Region:</span> {country.region}
+          </li>
+          <li>
+            <span>Capital:</span> {country.capital}
+          </li>
         </ul>
-      </div>
-    </StyledCountryCard>
+      </CountryDetails>
+    </CountryCardContainer>
   )
 }
 
@@ -22,19 +30,49 @@ CountryCard.propTypes = {
   country: PropTypes.object.isRequired
 }
 
-const StyledCountryCard = styled(Link)`
-  height: 393px;
+const CountryCardContainer = styled(Link)`
+  height: 303px;
   width: 240px;
-  ${({ theme: { primaryText, secondaryBackground, secondaryText } }) => ({
+  border: 1px solid;
+
+  ${({ theme: { border, secondaryBackground } }) => ({
     background: secondaryBackground,
-    color: secondaryText,
-    h1: {
-      color: primaryText
-    }
+    borderColor: border
   })}
+
   img {
     width: inherit;
     height: 153px;
+  }
+
+  @media (max-width: 375px) {
+    width: 100%;
+  }
+`
+
+const CountryDetails = styled.div`
+  padding: 24px;
+
+  ${({ theme: { secondaryText } }) => ({
+    color: secondaryText
+  })}
+
+  h4 {
+    font-weight: 800;
+    line-height: 24px;
+    font-size: 16px;
+  }
+
+  ul {
+    li {
+      font-size: 12px;
+      line-height: 18px;
+      padding-top: 8px;
+    }
+
+    span {
+      font-weight: 600;
+    }
   }
 `
 
