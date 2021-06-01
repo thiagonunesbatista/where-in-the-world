@@ -34,6 +34,11 @@ const CountryCardContainer = styled(Link)`
   height: 303px;
   width: 100%;
   border: 1px solid;
+  transition: transform 0.1s linear;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 
   ${({ theme: { border, secondaryBackground } }) => ({
     background: secondaryBackground,
