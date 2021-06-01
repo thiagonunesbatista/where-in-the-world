@@ -5,13 +5,15 @@ import styled from 'styled-components'
 
 import { useClickOutside } from 'hooks'
 
-export const Select = ({ headerMessage = '', options = [] }) => {
+export const Select = ({
+  headerMessage = '',
+  onChange,
+  options = [],
+  value
+}) => {
   const [isSelectOpen, setIsSelectOpen] = useState(false)
-  const [selectValue, setSelectValue] = useState(headerMessage)
 
   const selectContainerRef = useRef()
-
-  const handleOption = option => setSelectValue(option.label)
 
   const handleSelect = event => {
     event.stopPropagation()
@@ -23,7 +25,7 @@ export const Select = ({ headerMessage = '', options = [] }) => {
   return (
     <SelectContainer onClick={handleSelect} ref={selectContainerRef}>
       <Header>
-        <p>{selectValue}</p>
+        <p>{value ? value.label : headerMessage}</p>
         <Chevron up={isSelectOpen ? 1 : 0} />
       </Header>
 
@@ -34,7 +36,7 @@ export const Select = ({ headerMessage = '', options = [] }) => {
             <Option
               value={option.value}
               key={option.value}
-              onClick={() => handleOption(option)}
+              onClick={() => onChange(option)}
             >
               {option.label}
             </Option>
@@ -45,8 +47,9 @@ export const Select = ({ headerMessage = '', options = [] }) => {
 }
 
 Select.propTypes = {
-  options: PropTypes.array,
-  headerMessage: PropTypes.string
+  headerMessage: PropTypes.string,
+  onChange: PropTypes.func,
+  options: PropTypes.array
 }
 
 const Header = styled.div`
