@@ -37,7 +37,6 @@ const InputContainer = styled.div`
   border: 1px solid;
   display: flex;
   align-items: center;
-  margin: 40px 0;
 
   ${({ theme: { border, primaryText, secondaryBackground } }) => ({
     background: secondaryBackground,
@@ -65,8 +64,7 @@ const InputContainer = styled.div`
     font-weight: 400;
   }
 
-  @media (max-width: 375px) {
-    width: 343px;
-    margin-bottom: 16px;
+  @media (max-width: 768px) {
+    width: 100%;
   }
 `
