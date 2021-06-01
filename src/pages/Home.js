@@ -19,16 +19,30 @@ const selectOptions = [
 
 const Home = () => {
   const [countries, setCountries] = useState([])
+  const [regionFilter, setRegionFilter] = useState()
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
     const loadData = async () => {
       const response = await CountriesService.getCountries()
-      setCountries(response)
+      setCountries(response.slice(0, 8))
     }
 
     loadData()
   }, [])
+
+  useEffect(() => {
+    const loadRegionFilter = async () => {
+      const response = await CountriesService.searchRegion(regionFilter.value)
+      setCountries(response)
+    }
+
+    regionFilter && loadRegionFilter()
+  }, [regionFilter])
+
+  const handleSelect = value => {
+    setRegionFilter(value)
+  }
 
   const handleInput = event => {
     setInputValue(event.target.value)
@@ -52,8 +66,10 @@ const Home = () => {
         />
 
         <Select
+          value={regionFilter}
           options={selectOptions}
-          headerMessage='Search for a country...'
+          headerMessage='Filter by Region...'
+          onChange={handleSelect}
         />
       </FormContainer>
 
