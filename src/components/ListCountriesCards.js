@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import CountryCard from './CountryCard'
 
 const ListCountriesCards = ({ countries }) => {
-  console.log(countries)
   return (
     <ListContainer>
       {countries?.map(country => (
@@ -20,9 +19,14 @@ ListCountriesCards.propTypes = {
 
 const ListContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, 240px);
   justify-items: center;
-  gap: 100px;
+  gap: 63px 16px;
+  justify-content: center;
+
+  @media (max-width: 480px) {
+    gap: 16px 0;
+  }
 `
 
 export default ListCountriesCards
