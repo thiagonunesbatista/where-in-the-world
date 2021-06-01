@@ -36,6 +36,13 @@ const CountryCardContainer = styled(Link)`
   border: 1px solid;
   transition: transform 0.1s linear;
 
+  h4,
+  p {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   &:hover {
     transform: scale(1.1);
   }
