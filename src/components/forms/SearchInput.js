@@ -1,15 +1,23 @@
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import { FaSearch } from 'react-icons/fa'
+import { FaSearch, FaTimes } from 'react-icons/fa'
 
 export const SearchInput = ({
+  handleClearValue,
   handleInput,
   handleSubmit,
   placeholder,
   value,
-  type = 'text'
+  type = 'text',
+  submitOnEnterKey = false
 }) => {
+  const handleInternalSubmit = event => {
+    if (submitOnEnterKey && event.key === 'Enter') {
+      return handleSubmit(event)
+    }
+  }
+
   return (
     <InputContainer>
       <FaSearch size='16' onClick={handleSubmit} />
@@ -18,17 +26,24 @@ export const SearchInput = ({
         placeholder={placeholder}
         value={value}
         onChange={event => handleInput(event)}
+        onKeyPress={event => handleInternalSubmit(event)}
       />
+
+      {handleClearValue && value.length > 0 && (
+        <FaTimes size='16' onClick={handleClearValue} />
+      )}
     </InputContainer>
   )
 }
 
 SearchInput.propTypes = {
+  handleClearValue: PropTypes.func,
   handleInput: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   placeholder: PropTypes.string,
   value: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  submitOnEnterKey: PropTypes.bool
 }
 
 const InputContainer = styled.div`

@@ -39,6 +39,8 @@ const Home = () => {
     regionFilter && loadRegionFilter()
   }, [regionFilter])
 
+  const handleClearValue = () => setInputValue('')
+
   const handleSelect = value => {
     setRegionFilter(value)
   }
@@ -59,9 +61,11 @@ const Home = () => {
       <FormContainer>
         <SearchInput
           placeholder='Search for a country...'
+          handleClearValue={handleClearValue}
           handleSubmit={handleSubmit}
           handleInput={handleInput}
           value={inputValue}
+          submitOnEnterKey={true}
         />
 
         <Select
