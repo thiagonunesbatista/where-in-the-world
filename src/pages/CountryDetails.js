@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { Link, useParams, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import ArrowBack from 'components/ArrowBack'
@@ -86,7 +86,9 @@ const CountryDetails = () => {
               <BorderCountriesContainer>
                 <p>Border Countries: </p>
                 {country.borders.map((border, index) => (
-                  <span key={index}>{border}</span>
+                  <Link key={index} to={`/country/${border}`}>
+                    {border}
+                  </Link>
                 ))}
               </BorderCountriesContainer>
             )}
@@ -100,6 +102,10 @@ const CountryDetails = () => {
 const CountryDetailsContainer = styled.div`
   & > div:nth-child(1) {
     margin-top: 40px;
+
+    @media (max-width: 768px) {
+      margin-top: 32px;
+    }
   }
 
   @media (min-width: 1101px) {
@@ -137,6 +143,10 @@ const CountryDetailsContainer = styled.div`
       h2 {
         padding-top: 32px;
       }
+    }
+
+    @media (max-width: 768px) {
+      padding-top: 32px;
     }
   }
 
@@ -186,6 +196,7 @@ const BorderCountriesContainer = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  gap: 8px;
 
   p {
     width: 155px;
@@ -193,11 +204,11 @@ const BorderCountriesContainer = styled.div`
   }
 
   P,
-  span {
+  a {
     font-weight: 600;
   }
 
-  span {
+  a {
     border: 1px solid;
     padding: 4px 17px;
     height: 30px;
@@ -207,10 +218,6 @@ const BorderCountriesContainer = styled.div`
     })};
     line-height: 21.82px;
     font-size: 16px;
-
-    &:not(:last-child) {
-      margin-right: 8px;
-    }
   }
 
   @media (max-width: 1100px) {
