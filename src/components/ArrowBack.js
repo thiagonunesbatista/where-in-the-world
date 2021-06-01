@@ -24,7 +24,7 @@ const ArrowBackContainer = styled.div`
   display: flex;
   cursor: pointer;
   align-items: center;
-  color: ${({ theme }) => theme.secondaryColor};
+  color: ${({ theme }) => theme.primaryText};
 
   p {
     margin-left: 16px;
