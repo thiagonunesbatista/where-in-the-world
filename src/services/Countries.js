@@ -6,7 +6,7 @@ class Countries {
       const response = await api.get(`/name/${country}`)
       return response.data
     } catch (error) {
-      console.log(error)
+      return error
     }
   }
 
@@ -15,7 +15,7 @@ class Countries {
       const response = await api.get(`/region/${region}`)
       return response.data
     } catch (error) {
-      console.log(error)
+      return error
     }
   }
 
@@ -24,7 +24,7 @@ class Countries {
       const response = await api.get('/all')
       return response.data
     } catch (error) {
-      console.log('ERROR')
+      return error
     }
   }
 }

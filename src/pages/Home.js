@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import styled from 'styled-components'
 
 import { Select, SearchInput } from 'components/forms'
@@ -17,6 +18,7 @@ const selectOptions = [
 ]
 
 const Home = () => {
+  const [initialCountries, setInitialCountries] = useState([])
   const [countries, setCountries] = useState([])
   const [regionFilter, setRegionFilter] = useState()
   const [inputValue, setInputValue] = useState('')
@@ -25,6 +27,7 @@ const Home = () => {
     const loadData = async () => {
       const response = await CountriesService.getCountries()
       setCountries(response.slice(0, 8))
+      setInitialCountries(response.slice(0, 8))
     }
 
     loadData()
@@ -33,13 +36,18 @@ const Home = () => {
   useEffect(() => {
     const loadRegionFilter = async () => {
       const response = await CountriesService.searchRegion(regionFilter.value)
+      toast.success(`Successful search on region: ${regionFilter.label}.`)
       setCountries(response)
     }
 
     regionFilter && loadRegionFilter()
   }, [regionFilter])
 
-  const handleClearValue = () => setInputValue('')
+  const handleClearValue = () => {
+    setInputValue('')
+    setRegionFilter()
+    setCountries(initialCountries)
+  }
 
   const handleSelect = value => {
     setRegionFilter(value)
@@ -52,6 +60,11 @@ const Home = () => {
   const handleSubmit = async () => {
     if (inputValue.length > 0) {
       const response = await CountriesService.searchCountry(inputValue)
+      if (response?.response?.status === 404) {
+        return toast.error('Country not found!')
+      }
+
+      toast.success('Successful search!')
       setCountries(response)
     }
   }
