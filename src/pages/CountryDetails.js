@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 
 import ArrowBack from 'components/ArrowBack'
@@ -7,85 +7,92 @@ import ArrowBack from 'components/ArrowBack'
 import { formatNumberWithDots } from 'helpers/formatters'
 
 import CountriesClass from 'services/Countries'
+import { toast } from 'react-toastify'
 
 const CountriesService = new CountriesClass()
 
 const CountryDetails = () => {
   const [country, setCountry] = useState()
 
+  const history = useHistory()
   const params = useParams()
 
   useEffect(() => {
     const loadData = async () => {
       const response = await CountriesService.searchCountry(params.name)
+      if (response?.response?.status === 404) {
+        setTimeout(() => {
+          history.push('/')
+        }, 5000)
+        return toast.error('Country not found')
+      }
       setCountry(response[0])
     }
     loadData()
+    // eslint-disable-next-line
   }, [params.name])
-
-  if (!country) {
-    return <h2>Country not found</h2>
-  }
 
   return (
     <CountryDetailsContainer>
       <ArrowBack />
-      <div>
-        <img src={country.flag} alt={`${country?.name} flag`} />
+      {country && (
+        <div>
+          <img src={country.flag} alt={`${country?.name} flag`} />
 
-        <DetailsContainer>
-          <h2>{country.name}</h2>
-          <div>
+          <DetailsContainer>
+            <h2>{country.name}</h2>
             <div>
-              <p>
-                <span>Native Name:</span> {country.nativeName}
-              </p>
-              <p>
-                <span>Population:</span>{' '}
-                {formatNumberWithDots(country.population)}
-              </p>
-              <p>
-                <span>Region:</span> {country.region}
-              </p>
-              <p>
-                <span>Sub Region:</span> {country.subregion}
-              </p>
-              <p>
-                <span>Capital:</span> {country.capital}
-              </p>
+              <div>
+                <p>
+                  <span>Native Name:</span> {country.nativeName}
+                </p>
+                <p>
+                  <span>Population:</span>{' '}
+                  {formatNumberWithDots(country.population)}
+                </p>
+                <p>
+                  <span>Region:</span> {country.region}
+                </p>
+                <p>
+                  <span>Sub Region:</span> {country.subregion}
+                </p>
+                <p>
+                  <span>Capital:</span> {country.capital}
+                </p>
+              </div>
+
+              <div>
+                <p>
+                  <span>Top Level Domain: </span>
+                  {country.topLevelDomain.map(currentDomain => currentDomain)}
+                </p>
+                <p>
+                  <span>Currencies:</span>{' '}
+                  {country.currencies.map(currency => currency.name)}
+                </p>
+                <p>
+                  <span>Languages:</span>{' '}
+                  {country.languages.map((language, index) => {
+                    if (index < country.languages.length - 1) {
+                      return `${language.name}, `
+                    }
+                    return `${language.name}.`
+                  })}
+                </p>
+              </div>
             </div>
 
-            <div>
-              <p>
-                <span>Top Level Domain:</span>
-                {country.topLevelDomain.map(currentDomain => currentDomain)}
-              </p>
-              <p>
-                <span>Currencies:</span>{' '}
-                {country.currencies.map(currency => currency.name)}
-              </p>
-              <p>
-                <span>Languages:</span>{' '}
-                {country.languages.map((language, index) => {
-                  if (index < country.languages.length - 1) {
-                    return `${language.name}, `
-                  }
-                  return `${language.name}.`
-                })}
-              </p>
-            </div>
-          </div>
-
-          {country.borders.length > 0 && (
-            <BorderCountriesContainer>
-              <p>Border Countries: </p>
-              {country.borders.map((border, index) => (
-                <span key={index}>{border}</span>
-              ))}
-            </BorderCountriesContainer>
-          )}
-        </DetailsContainer>
-      </div>
+            {country.borders.length > 0 && (
+              <BorderCountriesContainer>
+                <p>Border Countries: </p>
+                {country.borders.map((border, index) => (
+                  <span key={index}>{border}</span>
+                ))}
+              </BorderCountriesContainer>
+            )}
+          </DetailsContainer>
+        </div>
+      )}
     </CountryDetailsContainer>
   )
 }
@@ -93,6 +100,12 @@ const CountryDetails = () => {
 const CountryDetailsContainer = styled.div`
   & > div:nth-child(1) {
     margin-top: 40px;
+  }
+
+  @media (min-width: 1101px) {
+    img + div {
+      margin-left: 100px;
+    }
   }
 
   h2 + div {
