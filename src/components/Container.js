@@ -7,7 +7,7 @@ const Container = ({ children }) => {
 const StyledContainer = styled.div`
   margin: 0 auto;
   width: 100%;
-  max-width: 1190px;
+  max-width: 1008px;
 
   @media (max-width: 375px) {
     max-width: 343px;
