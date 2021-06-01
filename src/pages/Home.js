@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
-import Container from 'components/Container'
 import { Select, SearchInput } from 'components/forms'
 import ListCountriesCards from 'components/ListCountriesCards'
 
@@ -56,7 +55,7 @@ const Home = () => {
   }
 
   return (
-    <Container>
+    <Fragment>
       <FormContainer>
         <SearchInput
           placeholder='Search for a country...'
@@ -74,7 +73,7 @@ const Home = () => {
       </FormContainer>
 
       {countries.length > 0 && <ListCountriesCards countries={countries} />}
-    </Container>
+    </Fragment>
   )
 }
 
