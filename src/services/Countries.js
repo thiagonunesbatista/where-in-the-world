@@ -10,6 +10,15 @@ class Countries {
     }
   }
 
+  async searchRegion(region) {
+    try {
+      const response = await api.get(`/region/${region}`)
+      return response.data
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   async getCountries() {
     try {
       const response = await api.get('/all')
