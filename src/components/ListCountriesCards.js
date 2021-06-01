@@ -23,10 +23,15 @@ const ListContainer = styled.div`
   justify-items: center;
   gap: 63px 16px;
   justify-content: center;
+  padding-bottom: 107px;
 
   @media (max-width: 480px) {
     gap: 16px 0;
     grid-template-columns: 100%;
+  }
+
+  @media (max-width: 768px) {
+    padding-bottom: 58px;
   }
 `
 
