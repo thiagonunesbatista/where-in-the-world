@@ -10,6 +10,7 @@ const GlobalStyle = createGlobalStyle`
 
 body {
   background-color: ${({ theme }) => theme.primaryBackground};
+  ${({ loading }) => loading && { overflow: 'hidden' }}
 }
 
 a {

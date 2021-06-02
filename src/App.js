@@ -1,20 +1,22 @@
+import { ToastContainer } from 'react-toastify'
 import { ThemeProvider } from 'styled-components'
 
 import 'react-toastify/dist/ReactToastify.css'
+
+import Loader from 'components/Loader'
 
 import { usePublicContext } from 'contexts/PublicContext'
 
 import PublicRoutes from 'routes/PublicRoutes'
 
 import { darkTheme, GlobalCss, lightTheme } from 'styles'
-import { ToastContainer } from 'react-toastify'
 
 const App = () => {
-  const { theme } = usePublicContext()
+  const { loading, theme } = usePublicContext()
 
   return (
     <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
-      <GlobalCss />
+      <GlobalCss loading={loading} />
       <ToastContainer
         position='top-right'
         autoClose={5000}
@@ -27,6 +29,7 @@ const App = () => {
         pauseOnHover
       />
       <PublicRoutes />
+      {loading && <Loader />}
     </ThemeProvider>
   )
 }

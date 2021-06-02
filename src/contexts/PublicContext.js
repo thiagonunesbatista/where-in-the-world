@@ -6,6 +6,7 @@ export const usePublicContext = () => useContext(publicContext)
 
 export const PublicContextProvider = ({ children }) => {
   const [theme, setTheme] = useState('dark')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const storagedTheme = localStorage.getItem('theme')
@@ -25,7 +26,7 @@ export const PublicContextProvider = ({ children }) => {
   }
 
   return (
-    <publicContext.Provider value={{ handleTheme, theme }}>
+    <publicContext.Provider value={{ loading, handleTheme, setLoading, theme }}>
       {children}
     </publicContext.Provider>
   )
