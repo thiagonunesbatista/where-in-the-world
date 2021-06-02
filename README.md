@@ -22,19 +22,13 @@ It's an application developed with [ReactJS](https://reactjs.org/) and uses API 
 1. clone the project
 
 ```shell
-git clone https://git.conrad-caine.com/apply/thiago-nunes.git
+git clone git@github.com:thiagonunesbatista/where-in-the-world.git
 ```
 
 2. enter in the projet folder
 
 ```shell
-cd thiago-nunes
-```
-
-3. checkout to the correct branch
-
-```shell
-git checkout develop
+cd where-in-the-world
 ```
 
 4. install the project dependencies
