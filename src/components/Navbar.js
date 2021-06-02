@@ -75,6 +75,7 @@ const SwitchThemeContainer = styled.button`
   color: inherit;
   cursor: pointer;
   width: 112px;
+  outline: none;
 
   &:hover {
     opacity: 0.5;
