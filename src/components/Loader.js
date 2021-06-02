@@ -5,6 +5,9 @@ const Loader = () => {
   return (
     <Fragment>
       <Overlay />
+      <SpinnerContainer>
+        <Spinner />
+      </SpinnerContainer>
       <Spinner />
     </Fragment>
   )
@@ -17,19 +20,28 @@ const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background: ${({ theme }) => theme.primaryBackground};
+  z-index: 1000;
 `
+
+const SpinnerContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
 const Spinner = styled.div`
   border-radius: 50%;
   animation: rotate 1s infinite linear;
   border: 10px solid ${({ theme }) => theme.primaryText};
   height: 100px;
   width: 100px;
-  z-index: 10;
-  position: absolute;
   border-top-color: ${({ theme }) => theme.border};
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 
   @keyframes rotate {
     0% {
