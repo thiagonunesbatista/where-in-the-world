@@ -4,6 +4,8 @@ import styled from 'styled-components'
 
 import ArrowBack from 'components/ArrowBack'
 
+import { usePublicContext } from 'contexts/PublicContext'
+
 import { formatNumberWithDots } from 'helpers/formatters'
 
 import CountriesClass from 'services/Countries'
@@ -17,9 +19,15 @@ const CountryDetails = () => {
   const history = useHistory()
   const params = useParams()
 
+  const { setLoading } = usePublicContext()
+
   useEffect(() => {
     const loadData = async () => {
+      setLoading(true)
       const response = await CountriesService.searchCountry(params.name)
+
+      setLoading(false)
+
       if (response?.response?.status === 404) {
         setTimeout(() => {
           history.push('/')
